@@ -10,6 +10,10 @@
 $url = "https://bikeindex.org:443/api/v3/search?page=1&per_page=50&location=IP&distance=10&stolenness=proximity";
 
 
+//I think I need to make another request to a geocode API.
+// Ideally I would feed it the JSON from the API request on line 10
+
+
 
 $curl = curl_init();
 
