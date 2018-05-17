@@ -1,0 +1,223 @@
+/*OVERWRITES*/
+
+main{
+    max-width: 60%;
+    min-width: 980px;
+    margin: 0 auto;
+}
+
+/*MAP*/
+
+#map {
+    height: 500px;
+    margin-top: 20px;
+    margin: 0 auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*TITLE AND FONT*/
+
+.headers{
+    color: white;
+    text-align: center;
+    font-size: 3em;
+}
+
+h3{
+    color: white;
+    font-size: 1.25em;
+    text-align: center;
+}
+p{
+    color: white;
+    margin-bottom: -10px;
+}
+.c-label{
+    color: white;
+}
+
+/*FORM*/
+
+/**/
+#p_find_your_way{
+    font-size: 1.5em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+.work-form button {
+    height: 50px;
+    border:0;
+    background-color:#AC2430;
+    color: #000;
+    border-radius: 10px;
+    padding:0.3em 1em;
+    text-transform:uppercase;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size:1em;
+    margin-top:1.2em;
+    cursor: pointer;
+    border: 1px solid #754f0a;
+    outline: none;
+    margin-bottom: 50px;
+}
+.form-field {
+    height: 50px;
+    font-size: 14px;
+    line-height: normal;
+    margin: 20px;
+    text-align: center;
+}
+
+#dest_city, #start_city {
+    height: 50px;
+    width: 500px;
+    border: 2px solid rgba(0,0,0,.1);
+    font-family: sans-serif;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    font-style: italic;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#field_city:focus, #field_address:focus, #field_PC:focus {
+    border: 2px solid #AC2430;
+}
+#submit-field{
+    text-align: center;
+}
+#submit:hover{
+    background-color: #CCCC98;
+}
+
+html{
+    box-sizing: border-box;
+    font-family: sans-serif;
+    height: 100%;
+}
+body{
+    margin:0;
+}
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+h1{
+    font-size: 6em;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    /*margin:0;*/
+    text-align: center;
+}
+h1 a{
+    text-decoration: none;
+    color: white;
+}
+#maintitle{
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    width: 900px;
+    margin: 0 auto;
+}
+#logo{
+    flex: 1 0 0;
+}
+#title{
+    margin-left: 2%;
+    margin-top:60px;
+    flex: 3 0 0;
+}
+
+nav{
+    text-align: center;
+}
+#header{
+    border-bottom: 5px solid #AC2430;
+    text-align: center;
+    /*position: relative;*/
+}
+#main-menu{
+    z-index: -1;
+}
+#main-menu a{
+    text-decoration: none;
+    color:#594A42;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+#main-menu a:hover{
+
+    /*background-color: #594A42;*/
+    color: #AC2430;
+}
+#main-menu ul li{
+    display:inline-block;
+    margin-right: 10px;
+    color: #594A42;
+}
+#main-menu li {
+    position:relative;
+}
+#mainlinks>li>a{
+    padding:6px;
+}
+#main-menu ul ul{
+    position:absolute;
+    background-color: #594A42;
+    left:-10000px;
+}
+#main-menu ul ul li{
+    display: block;
+}
+#main-menu ul ul a{
+    color:#cccc98;
+}
+#main-menu ul li:hover ul{
+    left:6px;
+}
+#sublink1 {
+    padding-left: 13px;
+    z-index: 1000;
+}
+#sublink2{
+    padding-left:0;
+    width: 130px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#menu-container
+{
+    /*position: absolute;
+    bottom: 0px;*/
+    width: 100%;
+    text-align: center;
+    vertical-align: bottom;
+}
+#pagewrap
+{
+    /*max-width: 1024px;*/
+    margin:0 auto;
+    border:1px solid black;
+    /*background:#cccc98;*/
+    background-image: url("images/bike-bg.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
+    position: relative;
+    z-index:10;
+    border-bottom: 5px solid #AC2430;
+}
+main{
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
+
+}
