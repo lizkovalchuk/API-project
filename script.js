@@ -75,10 +75,10 @@ function createClusters(a){
 //create a new instance of the the new Marker class
 // that will import images from the imagePath
 
-    // var markers=[];
-    // var markerCluster = new MarkerClusterer(map, markers,
-    //     {imagePath: 'images/m1.png'}
-    // );
+    var markers=[];
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'images/m1.png'}
+    );
 
     for( i = 0 ; i < a.bikes.length; i++) {
         console.log(a.bikes[i]);
@@ -99,17 +99,25 @@ function createClusters(a){
 //push the markers created in your loop and push the markers
 //into the array defined outside the loop.
 
-                    // markers.push(marker);
-                    // markerCluster.addMarker(marker);
+                    markers.push(marker);
+                    markerCluster.addMarker(marker);
                 }
                 else{
                     // console.log(results);
                     console.log(address);
                 }
-                // google.maps.event.addDomListener(window, 'load', initialize);
+                 google.maps.event.addDomListener(window, 'load', initialize);
             });
     }
 }
 
+createClusters();
+console.log(bikes);
 
 
+
+//creat an array
+// run  a loop go
+//set an interval every second (10 queries)
+//at each internval run a function that goes through the 10 items
+//with the fill array, you can put o the markers.

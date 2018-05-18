@@ -7,7 +7,7 @@
 
 
 //$url = "https://bikeindex.org:443/api/v3/search?stolenness=stolen";
-$url = "https://bikeindex.org:443/api/v3/search?page=1&per_page=50&location=IP&distance=10&stolenness=proximity";
+$url = "https://bikeindex.org/api/v3/search?page=1&per_page=100&location=Toronto&distance=10&stolenness=proximity";
 
 
 //I think I need to make another request to a geocode API.
