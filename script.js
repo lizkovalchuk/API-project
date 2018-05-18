@@ -98,7 +98,7 @@ function createClusters(a){
                     // console.log(results);
                     console.log(address);
                 }
-                google.maps.event.addDomListener(window, 'load', initialize);
+                // google.maps.event.addDomListener(window, 'load', initialize);
             });
     }
 }

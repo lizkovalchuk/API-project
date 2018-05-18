@@ -104,19 +104,15 @@ body{
 }
 h1{
     font-size: 6em;
-    color: white;
+    color: #AC2430;
     text-transform: uppercase;
     display: inline-block;
-    /*margin:0;*/
     text-align: center;
-}
-h1 {
-    text-decoration: none;
-    color: white;
+    margin-bottom: -100px;
 }
 
+
 #header{
-    border-bottom: 5px solid red;
     text-align: center;
 }
 
