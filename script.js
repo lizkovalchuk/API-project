@@ -71,10 +71,14 @@ function createClusters(a){
 //before the for loop, define an empty array
 //and a var that holds a new instance of a google method.
 
-    var markers=[];
-    var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'images/m1.png'}
-    );
+//if you want clusters, create an empty array of markers
+//create a new instance of the the new Marker class
+// that will import images from the imagePath
+
+    // var markers=[];
+    // var markerCluster = new MarkerClusterer(map, markers,
+    //     {imagePath: 'images/m1.png'}
+    // );
 
     for( i = 0 ; i < a.bikes.length; i++) {
         console.log(a.bikes[i]);
@@ -91,8 +95,12 @@ function createClusters(a){
                        position: results[0].geometry.location,
                        map:map
                     });
-                    markers.push(marker);
-                    markerCluster.addMarker(marker);
+
+//push the markers created in your loop and push the markers
+//into the array defined outside the loop.
+
+                    // markers.push(marker);
+                    // markerCluster.addMarker(marker);
                 }
                 else{
                     // console.log(results);
