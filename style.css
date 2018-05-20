@@ -1,30 +1,63 @@
-main{
-    max-width: 60%;
-    min-width: 980px;
-    margin: 0 auto;
-}
-
-/*MAP*/
-
-#map {
-    height: 500px;
-    margin-top: 20px;
-    margin: 0 auto;
-}
+/* ========================================================= */
+/* DEFAULT OVERIDES */
+/* ========================================================= */
 
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-/*TITLE AND FONT*/
+/* main{
+    max-width: 60%;
+    min-width: 980px;
 
-.headers{
+} */
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+#pagewrap
+{
+    margin:0 auto;
+    background-image: url("images/bike-bg.jpg");
+    background-size: 100%;
+    background-attachment: fixed;   
+}
+
+/* ========================================================= */
+/* TITLE AND FONTS */
+/* ========================================================= */
+
+h1{
+    font-size: 6em;
     color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: -50px;
+}
+
+#title{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+h2{
+    color: #ea4335;
     text-align: center;
     font-size: 3em;
 }
+
+.heading2{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
 
 h3{
     color: white;
@@ -36,7 +69,20 @@ p{
     margin-bottom: -10px;
 }
 
-/*FORM*/
+/* ========================================================= */
+/* MAP */
+/* ========================================================= */
+
+#map {
+    width: 800px;
+    height: 600px;
+    margin-top: 20px;
+    margin: 0 auto;
+}
+
+/* ========================================================= */
+/* FORM */
+/* ========================================================= */
 
 #p_find_your_way{
     font-size: 1.5em;
@@ -46,7 +92,7 @@ p{
 .work-form button {
     height: 50px;
     border:0;
-    background-color:#AC2430;
+    background-color:#ea4335;
     color: #000;
     border-radius: 10px;
     padding:0.3em 1em;
@@ -56,7 +102,7 @@ p{
     font-size:1em;
     margin-top:1.2em;
     cursor: pointer;
-    border: 1px solid #754f0a;
+    border: 1px solid  white;
     outline: none;
     margin-bottom: 50px;
 }
@@ -88,43 +134,39 @@ p{
     text-align: center;
 }
 #submit:hover{
-    background-color: #CCCC98;
+    background-color: white;
+    color: #ea4335;
 }
 
-html{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    height: 100%;
-}
-body{
-    margin:0;
-}
-*, *::before, *::after{
-    box-sizing: border-box;
-}
-h1{
-    font-size: 6em;
-    color: #AC2430;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    margin-bottom: -100px;
+/* ========================================================= */
+/* MEDIA QUERIES */
+/* ========================================================= */
+
+@media all and (max-width:985px){
+
+    h1{
+        font-size: 4em;
+    }
+
+    h2{
+        font-size: 2em;
+        margin-top: 2em;
+    }
+
+    #map{
+        width: 600px;
+        height: 400px;
+    }
+
+    #dest_city, #start_city {
+        width: 300px;    
+    }
+
 }
 
-
-#header{
-    text-align: center;
-}
-
-#pagewrap
-{
-    margin:0 auto;
-    background-image: url("images/bike-bg.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-attachment: fixed;   
-}
-main{
-    margin-left: 10%;
-    margin-right: 10%;
+@media all and (max-width:615px){
+    #map{
+        width: 400px;
+        height: 400px;
+    }
 }
