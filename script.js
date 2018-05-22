@@ -1,5 +1,10 @@
-
 // ======================MAP FUNCTIONALITY =======================//
+
+//global variables:
+
+var bikecounter = 0;
+var a = null;
+var timer;
 
 //initMap() creates the initial map
 var map;
@@ -19,9 +24,7 @@ function initMap() {
     };
     document.getElementById('submit').addEventListener('click', _click);
     ajaxToBikeApi();
-
 }
-
 
 //this function creates the route.
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -48,41 +51,36 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 // to plug into my javascript API
 
 function ajaxToBikeApi(){
-    var a = null;
+    // var a = null;
     $.ajax({
         url:"ajax.php", method: "POST",
         success:function(response){
             // console.log(JSON.parse(response));
             a = JSON.parse(response);
-             createClusters(a);
+ //            createClusters(a);
             //console.log(a.bikes[0]);
+             timer =  setInterval(function(){  
+                test();
+            }, 1000);
+            if(bikecounter == a.bikes.length){
+                clearInterval(timer);
+            }
         }
     });
 }
 
-
-//whatever loops through the results from the
-//ajax call and prints markers foreach bike.
-
-function createClusters(a){
-    // console.log(a.bikes.length);
-    console.log(a);
-
-//before the for loop, define an empty array
-//and a var that holds a new instance of a google method.
-
-//if you want clusters, create an empty array of markers
-//create a new instance of the the new Marker class
-// that will import images from the imagePath
+function test(){
 
     var markers=[];
     var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'images/m1.png'}
-    );
+        {imagePath: 'images/m1.png'});
 
-    for( i = 0 ; i < a.bikes.length; i++) {
-        console.log(a.bikes[i]);
-        //create LatLont for marker
+    limit = bikecounter + 10;
+    if(limit > a.bikes.length){
+        limit = a.bikes.length;
+    }
+
+    for(i = bikecounter; i < limit; i++){
 
         var gcoder = new google.maps.Geocoder();
         var address = a.bikes[i].stolen_location;
@@ -92,8 +90,8 @@ function createClusters(a){
                 if(status == 'OK'){
                     // console.log(results[0].geometry.location);
                     var marker = new google.maps.Marker({
-                       position: results[0].geometry.location,
-                       map:map
+                        position: results[0].geometry.location,
+                        map:map
                     });
 
 //push the markers created in your loop and push the markers
@@ -106,18 +104,11 @@ function createClusters(a){
                     // console.log(results);
                     console.log(address);
                 }
-                 google.maps.event.addDomListener(window, 'load', initialize);
+                google.maps.event.addDomListener(window, 'load');
             });
+        bikecounter = i;
     }
+    bikecounter++;
+    console.log(bikecounter);
 }
 
-createClusters();
-console.log(bikes);
-
-
-
-//creat an array
-// run  a loop go
-//set an interval every second (10 queries)
-//at each internval run a function that goes through the 10 items
-//with the fill array, you can put o the markers.
