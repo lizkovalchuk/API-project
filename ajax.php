@@ -1,18 +1,10 @@
 <?php
 
-//this is a get request to the API
-//this echo's the API's results.
-//then I plug the results into jquery via an ajax request
-//so I can plug those results into a google API.
+//this is a GET request to the Bike Index API
+//this file echo's the API's results.
+//the results are accessed via an ajax request
 
-
-//$url = "https://bikeindex.org:443/api/v3/search?stolenness=stolen";
 $url = "https://bikeindex.org/api/v3/search?page=1&per_page=100&location=Toronto&distance=10&stolenness=proximity";
-
-
-//I think I need to make another request to a geocode API.
-// Ideally I would feed it the JSON from the API request on line 10
-
 
 
 $curl = curl_init();
@@ -34,7 +26,5 @@ $err = curl_error($curl);
 curl_close($curl);
 echo $response;
 
-//$response = json_decode($response);
-////echo json_encode($response)
-//echo $response;
+
 
