@@ -1,54 +1,14 @@
-// ======================MAP FUNCTIONALITY =======================//
+# Stolen Bikes
 
-//global variables:
+## What's happening
 
-var bikecounter = 0;
-var bikesFromAPIresponse = null;
-var timer;
-var map;
+This small application uses PHP to make a `curl` request to a free API called Bikes Index.
 
+[Bike Index API](https://bikeindex.org/documentation/api_v3)
 
-function initMap() {
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
+The response is then collected using AJAX
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
-        center: { lat: 43.6532, lng: -79.3832 }
-    });
-
-    directionsDisplay.setMap(map);
-
-    var _click = function () {
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-    };
-    document.getElementById('submit').addEventListener('click', _click);
-    ajaxToBikeApi();
-}
-
-//this function creates the route.
-function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    directionsService.route({
-        origin: document.getElementById('start_city').value,
-        destination: document.getElementById('dest_city').value,
-        travelMode: "BICYCLING"
-    }, function (response, status) {
-        if (status === 'OK') {
-
-            // var results are extracted from JSON object
-            var result = response.routes[0].legs[0].duration.text;
-            directionsDisplay.setDirections(response);
-            document.getElementById("result").innerHTML = result;
-
-        } else {
-            window.alert('Directions request failed due to ' + status);
-        }
-    });
-}
-
-// this function sends a request to retrieve a JSON
-// to plug into my javascript API
-
+```javascript
 function ajaxToBikeApi() {
     $.ajax({
         url: "ajax.php", method: "POST",
@@ -63,7 +23,14 @@ function ajaxToBikeApi() {
         }
     });
 }
+```
 
+Notice that a timer is being called. This is because the GeoCode can only turn 10 address into long and lats per second and the Bike API returns address, not lats and longs. And the map markers need lat and longs.
+
+The `timer` is calling the `geoCode` function every second. This function loops through the JSON response from Bike Index API and pumps 10 address entries into Google's geocode method. Then results from Google's `geocode` are stored in a `var` called `marker` and then `marker` is pumped into a `markers` array and Google's `MarkerClusterer` library to enable marker clustering.
+
+
+```javascript
 function geoCode() {
 
     var markers = [];
@@ -100,4 +67,4 @@ function geoCode() {
     }
     bikecounter++;
 }
-
+```
