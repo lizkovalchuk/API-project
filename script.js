@@ -3,8 +3,10 @@
 //global variables:
 
 var bikecounter = 0;
-var a = null;
+var bikes = null;
 var timer;
+var bikeIdsObj = {};
+
 
 //initMap() creates the initial map
 var map;
@@ -25,6 +27,25 @@ function initMap() {
     document.getElementById('submit').addEventListener('click', _click);
     ajaxToBikeApi();
 }
+
+function getBikeIds(bikes) {
+    var bikeIds = [];
+    for( i = 0; i < bikes.bikes.length; i++){
+        bikeIds.push(bikes.bikes[i].id)
+    }
+    bikeIdsObj = $.extend({}, bikeIds);
+
+    $.ajax({
+        url:"bike-locations.php", method: "POST",
+        data: {bikeIdsObj: bikeIdsObj},
+        success:function(response){
+            bikeLocations = response;
+            console.log(bikeLocations);
+            addMarkers();
+        }
+    })
+}
+
 
 //this function creates the route.
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -51,44 +72,40 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 // to plug into my javascript API
 
 function ajaxToBikeApi(){
-    // var a = null;
     $.ajax({
-        url:"ajax.php", method: "POST",
+        url:"toronto-bikes.php", method: "POST",
         success:function(response){
-            // console.log(JSON.parse(response));
-            a = JSON.parse(response);
- //            createClusters(a);
-            //console.log(a.bikes[0]);
-             timer =  setInterval(function(){  
-                test();
+            bikes = JSON.parse(response);
+            getBikeIds(bikes);
+            timer =  setInterval(function(){  
+                geocoder();
             }, 1000);
-            if(bikecounter == a.bikes.length){
+            if(bikecounter == bikes.bikes.length){
                 clearInterval(timer);
             }
         }
     });
 }
 
-function test(){
+function geocoder(){
 
     var markers=[];
     var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'images/m1.png'});
 
     limit = bikecounter + 10;
-    if(limit > a.bikes.length){
-        limit = a.bikes.length;
+    if(limit > bikes.bikes.length){
+        limit = bikes.bikes.length;
     }
 
     for(i = bikecounter; i < limit; i++){
 
         var gcoder = new google.maps.Geocoder();
-        var address = a.bikes[i].stolen_location;
+        var address = bikes.bikes[i].stolen_location;
         gcoder.geocode(
             {'address': address},
             function (results, status){
                 if(status == 'OK'){
-                    // console.log(results[0].geometry.location);
                     var marker = new google.maps.Marker({
                         position: results[0].geometry.location,
                         map:map
@@ -102,13 +119,17 @@ function test(){
                 }
                 else{
                     // console.log(results);
-                    console.log(address);
+                    // console.log(address);
                 }
                 google.maps.event.addDomListener(window, 'load');
             });
         bikecounter = i;
     }
     bikecounter++;
-    console.log(bikecounter);
+    // console.log(bikecounter);
+};
+
+function addMarkers() {
+
 }
 
