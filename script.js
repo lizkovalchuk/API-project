@@ -7,10 +7,8 @@ var bikes = null;
 var timer;
 var bikeIdsObj = {};
 
-
 //initMap() creates the initial map
 var map;
-
 
 function initMap() {
     var directionsService = new google.maps.DirectionsService;
@@ -31,25 +29,24 @@ function initMap() {
 }
 
 function getBikeIds(bikes) {
-    var bikeIds = [];
-    for( i = 0; i < bikes.bikes.length; i++){
-        bikeIds.push(bikes.bikes[i].id)
-    }
-    bikeIdsObj = $.extend({}, bikeIds);
 
-    $.ajax({
-        url:"bike-locations.php", method: "POST",
-        data: {bikeIdsObj: bikeIdsObj},
-        success:function(response){
-            bikeLocations = response;
-            console.log(bikeLocations);
-            addMarkers();
-        }
-    })
+    for( i = 0; i < bikes.bikes.length; i++){
+        var bikeId = bikes.bikes[i].id.toString()
+
+
+        $.ajax({
+            url:"bike-locations.php", method: "POST",
+            data: { bikeId: bikeId },
+            success:function(response){
+                bike = JSON.parse(response);
+                var latitude = bike.bike.stolen_record.latitude;
+                var longitude = bike.bike.stolen_record.longitude;
+                addMarkers(latitude, longitude);
+            }
+        });
+    }
 }
 
-
-//this function creates the route.
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     directionsService.route({
         origin: document.getElementById('start_city').value,
@@ -104,6 +101,7 @@ function geocoder() {
 
         var gcoder = new google.maps.Geocoder();
         var address = bikes.bikes[i].stolen_location;
+
         gcoder.geocode(
             {'address': address},
             function (results, status){
@@ -113,25 +111,32 @@ function geocoder() {
                         map: map
                     });
 
-                    // push the lat and longs (stored in marker variable on line 88) created in your loop
-                    // into the markers array defined outside the loop as well as the markerCluster function
-
                     markers.push(marker);
                     markerCluster.addMarker(marker);
-                }
-                else{
-                    // console.log(results);
-                    // console.log(address);
                 }
                 google.maps.event.addDomListener(window, 'load');
             });
         bikecounter = i;
     }
     bikecounter++;
-    // console.log(bikecounter);
 };
 
-function addMarkers() {
+function addMarkers(latitude, longitude) {
+    if (latitude && longitude ) {
+        var location = {lat: latitude, lng: longitude};
+        var markers = [];
 
+        var markerCluster = new MarkerClusterer(map, markers,
+            { imagePath: 'images/m1.png' });
+
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+
+        markers.push(marker);
+        markerCluster.addMarker(marker);
+        google.maps.event.addDomListener(window, 'load');
+    }
 }
 
